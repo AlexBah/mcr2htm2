@@ -27,8 +27,10 @@ int SeekFile(char *ShortName, char *Extension)
 	strcat(FullNamePicture, Extension);
 	// try seek file
 	if ((pFile = _findfirst(FullNamePicture, &Picture_file)) == -1L)
+		{
 		_findclose(pFile); //close seeking
 		return 1; // not found
+		}
 	else
 	{
 		_findclose(pFile); //close seeking
@@ -41,7 +43,7 @@ void DivMaker (FILE *pTextFile,char *FileName)
 	char ShortName[100] = "";
 	strncpy(ShortName, FileName, strlen(FileName) - 4);
 	// begining of <div> block
-	fprintf(pTextFile, "<Div style=\"float:left; width:120px; height:160px; overflow:auto\">\n");
+	fprintf(pTextFile, "<Div style=\"float:left; width:120px; height:160px; overflow:hidden\">\n");
 	fprintf(pTextFile, "	<a href=\"%s.mcr\">\n", ShortName);
 	// Image of *.mcr
 	if (SeekFile(ShortName, "jpg") == 0)
